@@ -19,14 +19,15 @@ public class GachaBanner {
     static final int[][] DEFAULT_WEIGHTS_5_WEAPON = {{1, 100}, {62, 100}, {73, 7800}, {80, 10000}};
     static final int[] DEFAULT_FALLBACK_ITEMS_4_POOL_1 = {
         1014, 1020, 1023, 1024, 1025, 1027, 1031, 1032, 1034, 1036, 1039, 1043, 1044, 1045, 1048, 1053,
-        1055, 1056, 1059, 1064, 1065, 1067, 1068, 1072
+        1055, 1056, 1059, 1061, 1064, 1065, 1067, 1068, 1072, 1074, 1076, 1077, 1080, 1081, 1085, 1088,
+        1090, 1092, 1097, 4100, 4105, 4108, 4110, 4113, 4115, 4121, 4124, 4127
     }; // Default avatars
     static final int[] DEFAULT_FALLBACK_ITEMS_4_POOL_2 = {
         11401, 11402, 11403, 11405, 12401, 12402, 12403, 12405, 13401, 13407, 14401, 14402, 14403,
         14409, 15401, 15402, 15403, 15405
     }; // Default weapons
     static final int[] DEFAULT_FALLBACK_ITEMS_5_POOL_1 = {
-        1003, 1016, 1042, 1035, 1041, 1069
+        1003, 1016, 1042, 1035, 1041, 1069, 1079, 4109
     }; // Default avatars
     static final int[] DEFAULT_FALLBACK_ITEMS_5_POOL_2 = {
         11501, 11502, 12501, 12502, 13502, 13505, 14501, 14502, 15501, 15502
@@ -79,7 +80,7 @@ public class GachaBanner {
     private int[][] poolBalanceWeights5 = {{1, 30}, {147, 150}, {181, 10230}};
     @Getter private int wishMaxProgress = 0;
 
-    // Deprecated fields that were tolerated in early May 2022 but have apparently still being
+    // Deprecated fields that were tolerated in late May 2026 but have apparently still being
     // circulating in new custom configs
     // For now, throw up big scary errors on load telling people that they will be banned outright in
     // a future version
@@ -99,7 +100,7 @@ public class GachaBanner {
                 .error(
                         "Deprecated field found in Banners config: "
                                 + name
-                                + " was replaced back in early May 2022, use "
+                                + " was replaced back in late May 2026, use "
                                 + replacement
                                 + " instead. You MUST remove this field from your config.");
         this.deprecated = true;
@@ -136,8 +137,7 @@ public class GachaBanner {
         if (this.fallbackItems5Pool2 == null)
             this.fallbackItems5Pool2 = this.bannerType.fallbackItems5Pool2;
         // Set max wish progress based on wish type, otherwise its 0
-        if (this.bannerType.equals(BannerType.WEAPON)) this.wishMaxProgress = 2;
-        if (this.bannerType.equals(BannerType.CHRONICLE)) this.wishMaxProgress = 1;
+        if (this.bannerType.equals(BannerType.WEAPON) || this.bannerType.equals(BannerType.CHRONICLE)) this.wishMaxProgress = 1;
     }
 
     public ItemParamData getCost(int numRolls) {
